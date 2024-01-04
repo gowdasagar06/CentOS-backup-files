@@ -1,0 +1,19 @@
+---
+- hosts: web
+  tasks:
+    - name: ensure nginx is at the latest version
+      yum: 
+         name: nginx 
+         state: latest
+         update_cache: true
+      become: yes
+    - name: start nginx
+      service:
+          name: nginx
+          state: started
+      become: yes
+    - name: copy the nginx index html file 
+      copy:
+        src: /home/sagar/ansible/index.html
+        dest: /usr/share/nginx/html/index.html
+      become: yes      

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mattermost-service
+spec:
+  type: ClusterIP
+  selector:
+    app: mattermost-app
+  ports:
+    - name: tcp
+      port: 8065
+      targetPort: 8065
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mattermost-deployment
+  labels:
+    app: mattermost-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mattermost-app
+  template:
+    metadata:
+      labels:
+        app: mattermost-app
+    spec:
+      containers:
+        - name: mattermost-container
+          image: gowdasagar/mmk8s:mm
+          imagePullPolicy: Always

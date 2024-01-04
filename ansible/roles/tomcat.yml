@@ -1,0 +1,4 @@
+- name: Tomcat deployment playbook
+  hosts: web
+  roles:
+    - tomcat

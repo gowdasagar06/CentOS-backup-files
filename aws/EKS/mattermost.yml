@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mattermost-deployment
+  labels:
+    app: mattermost-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mattermost-app
+  template:
+    metadata:
+      labels:
+        app: mattermost-app
+    spec:
+      containers:
+        - name: mattermost-container
+          image: 814257489889.dkr.ecr.ap-south-1.amazonaws.com/mm1:latest
